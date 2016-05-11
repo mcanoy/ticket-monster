@@ -33,7 +33,7 @@ copy_artifacts "deployments"
 
 
 echo "Copying artifact to deployment root " ${APPLICATION_ARTIFACT_URL}
-curl -o ${DEPLOY_DIR}/ROOT.war -O ${WAR_FILE_URL}
+curl -o ${DEPLOY_DIR}/ROOT.war -O ${APPLICATION_ARTIFACT_URL}
 
 
 exit 0
