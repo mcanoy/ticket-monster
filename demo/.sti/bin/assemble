@@ -35,7 +35,10 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   pushd $LOCAL_SOURCE_DIR &> /dev/null
   echo "Found pom.xml..."
   APP_VERSION=`mvn help:evaluate -Dexpression=project.version | grep -v "KB" | grep -v "Download" | grep -v "[INFO]"`
-  echo "TicketMonster version is " $APP_VERSION "....."
+  ART_ID=`mvn help:evaluate -Dexpression=project.artifactId -e |grep -v "[INFO]"`
+  GROUP_ID=`mvn help:evaluate -Dexpression=project.groupId -e |grep -v "[INFO]" | sed 's/\./\//g'`
+  NEXUS_URL=`mvn help:evaluate -Dexpression=project.distributionManagementArtifactRepository.url |grep -v "[INFO]"`
+  echo "TicketMonster war is " $NEXUS_URL$GROUP_ID/$ART_ID/$APP_VERSION/$ART_ID-$APP_VERSION.war "...."
 fi
 
 
