@@ -35,7 +35,7 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   pushd $LOCAL_SOURCE_DIR &> /dev/null
   echo "Found pom.xml..."
 
-  GROUP_ID=`xmllint --xpath "//*[local-name()='project']/*[local-name()='groupId']/text()" pom.xml`
+  GROUP_ID=`xmllint --xpath "//*[local-name()='project']/*[local-name()='groupId']/text()" pom.xml | sed 's/\./\//g'`
   ART_ID=`xmllint --xpath "//*[local-name()='project']/*[local-name()='artifactId']/text()" pom.xml`
   APP_VERSION=`xmllint --xpath "//*[local-name()='project']/*[local-name()='version']/text()" pom.xml`
   NEXUS_URL=`xmllint --xpath "//*[local-name()='project']/*[local-name()='distributionManagement']/*[local-name()='repository']/*[local-name()='url']/text()" pom.xml`
