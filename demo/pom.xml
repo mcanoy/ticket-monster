@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.examples</groupId>
     <artifactId>ticket-monster</artifactId>
-    <version>2.7.1-ose3</version>
+    <version>2.7.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>ticket-monster</name>
     <description>A starter HTML5 + REST webapp project for use on JBoss EAP.</description>
@@ -283,6 +283,19 @@
         </pluginManagement>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>Releases</id>
+            <name>Releases</name>
+            <url>http://nexus.apps.innovation.redhat.com/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <name>Snapshots</name>
+            <url>http://nexus.apps.innovation.redhat.com/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <profiles>
         <profile>
             <!-- The default profile skips all tests, though you can tune 
@@ -511,4 +524,5 @@
 		</profile>
 
     </profiles>
+ 
 </project>
