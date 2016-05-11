@@ -29,7 +29,7 @@ function copy_artifacts() {
 # Copy the source for version
 cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
 
-APP_VERSION="NADA"
+NEXUS_URL="http://NADA"
 
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   pushd $LOCAL_SOURCE_DIR &> /dev/null
@@ -48,8 +48,8 @@ fi
 copy_artifacts "deployments"
 
 
-echo "Copying artifact to deployment root " ${APPLICATION_ARTIFACT_URL}
-curl -o ${DEPLOY_DIR}/ROOT.war -O ${APPLICATION_ARTIFACT_URL}
+echo "Copying artifact to deployment root " ${NEXUS_URL}
+curl -o ${DEPLOY_DIR}/ROOT.war -O ${NEXUS_URL}
 
 
 exit 0
