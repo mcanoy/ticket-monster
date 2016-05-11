@@ -29,16 +29,19 @@ function copy_artifacts() {
 # Copy the source for version
 cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
 
-NEXUS_URL="http://NADA"
+NEXUS_WAR_URL="http://NADA"
 
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   pushd $LOCAL_SOURCE_DIR &> /dev/null
   echo "Found pom.xml..."
-  APP_VERSION=`mvn help:evaluate -Dexpression=project.version | grep -v "KB" | grep -v "Download" | grep -v "[INFO]"`
-  ART_ID=`mvn help:evaluate -Dexpression=project.artifactId -e |grep -v "[INFO]"`
-  GROUP_ID=`mvn help:evaluate -Dexpression=project.groupId -e |grep -v "[INFO]" | sed 's/\./\//g'`
-  NEXUS_URL=`mvn help:evaluate -Dexpression=project.distributionManagementArtifactRepository.url |grep -v "[INFO]"`
-  echo "TicketMonster war is " $NEXUS_URL$GROUP_ID/$ART_ID/$APP_VERSION/$ART_ID-$APP_VERSION.war "...."
+
+  GROUP_ID=`xmllint --xpath "//*[local-name()='project']/*[local-name()='groupId']/text()" pom.xml`
+  ART_ID=`xmllint --xpath "//*[local-name()='project']/*[local-name()='artifactId']/text()" pom.xml`
+  APP_VERSION=`xmllint --xpath "//*[local-name()='project']/*[local-name()='version']/text()" pom.xml`
+  NEXUS_URL=`xmllint --xpath "//*[local-name()='project']/*[local-name()='distributionManagement']/*[local-name()='repository']/*[local-name()='url']/text()" pom.xml`
+
+  NEXUS_WAR_URL=$NEXUS_URL$GROUP_ID/$ART_ID/$APP_VERSION/$ART_ID-$APP_VERSION.war
+  echo "TicketMonster war is -"$NEXUS_WAR_URL"-...."
 fi
 
 
@@ -48,8 +51,8 @@ fi
 copy_artifacts "deployments"
 
 
-echo "Copying artifact to deployment root " ${NEXUS_URL}
-curl -o ${DEPLOY_DIR}/ROOT.war -O ${NEXUS_URL}
+echo "Copying artifact to deployment root " ${NEXUS_WAR_URL}
+curl -o ${DEPLOY_DIR}/ROOT.war -O ${NEXUS_WAR_URL}
 
 
 exit 0
