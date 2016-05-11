@@ -26,6 +26,19 @@ function copy_artifacts() {
   fi
 }
 
+# Copy the source for version
+cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+
+APP_VERSION="NADA"
+
+if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
+  pushd $LOCAL_SOURCE_DIR &> /dev/null
+  echo "Found pom.xml..."
+  APP_VERSION=`mvn help:evaluate -Dexpression=project.version | grep -v "[INFO]"`
+  echo "TicketMonster version is " $APP_VERSION
+fi
+
+
 # Copy (probably binary) artifacts from the deployments/
 # directory to the $JBOSS_HOME/standalone/deployments/
 # directory for later deployment
