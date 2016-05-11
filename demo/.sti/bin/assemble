@@ -34,7 +34,7 @@ APP_VERSION="NADA"
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   pushd $LOCAL_SOURCE_DIR &> /dev/null
   echo "Found pom.xml..."
-  APP_VERSION=`mvn help:evaluate -Dexpression=project.version | grep -v "KB" | grep -v "Downloaded" | grep -v "[INFO]"`
+  APP_VERSION=`mvn help:evaluate -Dexpression=project.version | grep -v "KB" | grep -v "Download" | grep -v "[INFO]"`
   echo "TicketMonster version is " $APP_VERSION "....."
 fi
 
