@@ -29,9 +29,6 @@ cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
 NEXUS_WAR_URL="http://NADA"
 
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
- #kmcanoy test mvn test
-  mvn test -Popenshift -e
-
 
   pushd $LOCAL_SOURCE_DIR &> /dev/null
   echo "Found pom.xml..."
