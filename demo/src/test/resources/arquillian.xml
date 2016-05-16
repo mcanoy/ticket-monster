@@ -26,7 +26,7 @@
    <container qualifier="jboss" default="true">
       <!-- If you want to use the JBOSS_HOME environment variable, just delete the jbossHome property -->
       <configuration>
-          <property name="jbossHome">target/jboss-eap-6.4/</property>
+          <property name="jbossHome">/var/lib/jenkins/jobs/Ticket-Monster-Test/workspace/demo/target/jboss-eap-6.4/</property>
           <property name="javaVmArguments">-Djboss.socket.binding.port-offset=100 -Djboss.management.native.port=9054          </property>
       </configuration>
    </container>
