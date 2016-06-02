@@ -7,3 +7,5 @@ node {
   echo 'Building Project'
   def mvnHome = tool 'M3'
   sh "${mvnHome}/bin/mvn package"
+
+}
