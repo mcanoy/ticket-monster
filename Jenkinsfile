@@ -14,7 +14,7 @@ node {
   env.WORKSPACE = readFile('pwd.current')
   env.JBOSS_HOME = "${env.WORKSPACE}/jboss/jboss-eap-6.4"
 
-  echo "JBOSS_HOME" $JBOSS_HOME
+  sh '''echo "JBOSS_HOME" $JBOSS_HOME
 
   if [ ! -d "$JBOSS_HOME" ]; then
     rm -rf jboss
