@@ -6,6 +6,6 @@ node {
   stage 'Build Project With Maven'
   echo 'Building Project'
   def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn package"
+  sh "${mvnHome}/bin/mvn -f demo/pom.xml clean package -Prelease-dist"
 
 }
