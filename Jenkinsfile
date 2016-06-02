@@ -25,6 +25,6 @@ node {
   fi
 '''
 
-  def mvnHome = tool 'M3'
+  echo "${mvnHome}"
   sh "${mvnHome}/bin/mvn -f demo/pom.xml test -Parq-jbossas-managed"
 }
