@@ -23,8 +23,8 @@ node {
     curl -o jboss.tar -0 http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/content/repositories/releases/org/jboss/eap/6.4.0/eap-6.4.0.tar
     tar -xvf jboss.tar
   fi
+'''
 
   def mvnHome = tool 'M3'
   ${mvnHome}/bin/mvn -f demo/pom.xml test -Parq-jbossas-managed
-'''
 }
