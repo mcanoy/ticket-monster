@@ -10,7 +10,10 @@ node {
 
   stage 'Run Arquillian Tests'
 
-  sh '''JBOSS_HOME=$WORKSPACE/jboss/jboss-eap-6.4
+  sh 'pwd > pwd.current'
+  env.WORKSPACE = readFile('pwd.current')
+  env.JBOSS_HOME = "${env.WORKSPACE}/jboss/jboss-eap-6.4"
+
   echo "JBOSS_HOME" $JBOSS_HOME
 
   if [ ! -d "$JBOSS_HOME" ]; then
@@ -21,6 +24,7 @@ node {
     tar -xvf jboss.tar
   fi
 
+  def mvnHome = tool 'M3'
   ${mvnHome}/bin/mvn -f demo/pom.xml test -Parq-jbossas-managed
 '''
 }
