@@ -8,4 +8,6 @@ node {
   def mvnHome = tool 'M3'
   sh "${mvnHome}/bin/mvn -f demo/pom.xml clean package -Prelease-dist"
 
+  stage 'Run Arquillian Tests'
+  sh "${mvnHome}/bin/mvn} -f demo/pom.xml test -Parq-jbossas-managed"
 }
