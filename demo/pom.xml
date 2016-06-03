@@ -68,6 +68,7 @@
         <version.jboss.bom.eap>6.3.2.GA</version.jboss.bom.eap>
         <version.jboss.bom.wfk>2.7.0-redhat-1</version.jboss.bom.wfk>
         <buildhelper.plugin.version>1.7</buildhelper.plugin.version>
+        <nexus.url>http://nexus.apps.innovation.redhat.com/</nexus.url>
     </properties>
 
     <dependencyManagement>
@@ -285,14 +286,14 @@
 
     <distributionManagement>
         <repository>
-            <id>Releases</id>
+            <id>nexus</id>
             <name>Releases</name>
-            <url>http://nexus.apps.innovation.redhat.com/content/repositories/releases/</url>
+            <url>${nexus.url}content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
-            <id>Snapshots</id>
+            <id>nexus</id>
             <name>Snapshots</name>
-            <url>http://nexus.apps.innovation.redhat.com/content/repositories/snapshots/</url>
+            <url>${nexus.url}content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 

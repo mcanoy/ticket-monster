@@ -6,7 +6,7 @@ node {
   stage 'Build Project With Maven'
   echo 'Building Project'
   def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -f demo/pom.xml clean package -Prelease-dist"
+  sh "${mvnHome}/bin/mvn -f demo/pom.xml clean package deploy -Prelease-dist -Dnexus.url=http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/"
 
   stage 'Run Arquillian Tests'
 
@@ -27,4 +27,16 @@ node {
 
   echo "${mvnHome}"
   sh "${mvnHome}/bin/mvn -f demo/pom.xml test -Parq-jbossas-managed"
+}
+
+
+def projectSet(String project){
+    //TODO - need oc on the PATH
+    def ocHome = "/Users/Shared/occlient"
+    //Use a credential called openshift-dev
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'osecred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        sh "${ocHome}/oc login --insecure-skip-tls-verify=true -u $env.USERNAME -p $env.PASSWORD https://10.1.2.2:8443"
+    }
+    sh "${ocHome}/oc new-project ${project} || echo 'Project exists'"
+    sh "${ocHome}/oc project ${project}"
 }
