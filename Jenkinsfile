@@ -12,7 +12,7 @@ node {
 
   sh 'pwd > pwd.current'
   env.WORKSPACE = readFile('pwd.current')
-  env.JBOSS_HOME = "${env.WORKSPACE}/jboss/jboss-eap-6.4"
+  env.JBOSS_HOME = "${env.WORKSPACE}".trim() + "/jboss/jboss-eap-6.4"
 
   sh '''echo "JBOSS_HOME" $JBOSS_HOME
 
