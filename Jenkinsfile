@@ -6,7 +6,7 @@ node {
   stage 'Build Project With Maven'
   echo 'Building Project'
   def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -f demo/pom.xml clean package deploy -Prelease-dist -Dnexus.url=http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/"
+  sh "${mvnHome}/bin/mvn -X -f demo/pom.xml clean package deploy -Prelease-dist -Dnexus.url=http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/"
 
   stage 'Run Arquillian Tests'
 
