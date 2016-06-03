@@ -6,7 +6,10 @@ node {
   stage 'Build Project With Maven'
   echo 'Building Project'
   def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -X -f demo/pom.xml clean package deploy -Prelease-dist -Dnexus.url=http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/"
+  wrap([$class: 'ConfigFileBuildWrapper', managedFiles: [[fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig:TM-settings', 
+			variable: 'SETTINGS_PATH']] ]) {
+        sh "${mvnHome}/bin/mvn --settings ${env.SETTINGS_PATH} -f demo/pom.xml clean package deploy -Prelease-dist -Dnexus.url=http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/"
+		}
 
   stage 'Run Arquillian Tests'
 
