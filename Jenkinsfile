@@ -1,4 +1,4 @@
-node {
+qGode {
   stage 'Git checkout'
   echo 'Checking out git repository'
   git url: 'https://github.com/mcanoy/ticket-monster.git', branch: 'openshift-pipe'
@@ -6,7 +6,7 @@ node {
   stage 'Build Project With Maven'
   echo 'Building Project'
   def mvnHome = tool 'M3'
-  wrap([$class: 'ConfigFileBuildWrapper', managedFiles: [[fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig:TM-settings', 
+  wrap([$class: 'ConfigFileBuildWrapper', managedFiles: [[fileId: 'tm-settings-xml', 
 			variable: 'SETTINGS_PATH']] ]) {
         sh "${mvnHome}/bin/mvn --settings ${env.SETTINGS_PATH} -f demo/pom.xml clean package deploy -Prelease-dist -Dnexus.url=http://nexus-infra-tools.rhel-cdk.10.1.2.2.xip.io/"
 		}
