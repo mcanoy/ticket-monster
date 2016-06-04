@@ -1,4 +1,4 @@
-qGode {
+node {
   stage 'Git checkout'
   echo 'Checking out git repository'
   git url: 'https://github.com/mcanoy/ticket-monster.git', branch: 'openshift-pipe'
