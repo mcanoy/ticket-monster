@@ -68,6 +68,10 @@
         <version.jboss.bom.eap>6.3.2.GA</version.jboss.bom.eap>
         <version.jboss.bom.wfk>2.7.0-redhat-1</version.jboss.bom.wfk>
         <buildhelper.plugin.version>1.7</buildhelper.plugin.version>
+        <version.jacoco>0.7.4.201502262128</version.jacoco>
+        <version.arquillian_jacoco>1.0.0.Alpha8</version.arquillian_jacoco>
+        <version.plugin.maven.surefire>2.18.1</version.plugin.maven.surefire>
+        <version.plugin.maven.failsafe>2.18.1</version.plugin.maven.failsafe>
     </properties>
 
     <dependencyManagement>
@@ -226,6 +230,19 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-jacoco</artifactId>
+            <version>${version.arquillian_jacoco}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.core</artifactId>
+            <version>${version.jacoco}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- RESTEasy dependencies that bring in Jackson Core and RESTEasy APIs+SPIs, which we use for
             fine tuning the content of the JSON responses -->
         <dependency>
@@ -310,7 +327,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
+                        <version>${version.plugin.maven.surefire}</version>
                         <configuration>
                             <skip>true</skip>
                         </configuration>
@@ -327,6 +344,59 @@
                 the test, shutting it down when done -->
             <!-- Run with: mvn clean test -Parq-jbossas-managed -->
             <id>arq-jbossas-managed</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${version.jacoco}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>default-prepare-agent-integration</id>
+                                <goals>
+                                    <goal>prepare-agent-integration</goal>
+                                </goals>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version.plugin.maven.surefire}</version>
+                        <configuration>
+                            <failIfNoTests>false</failIfNoTests>
+                            <excludedGroups>org.jboss.arquillian.junit.Arquillian</excludedGroups>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${version.plugin.maven.failsafe}</version>
+                        <configuration>
+                            <groups>org.jboss.arquillian.junit.Arquillian</groups>
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
             <dependencies>
                 <dependency>
                     <groupId>org.jboss.as</groupId>
@@ -372,7 +442,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
+                        <version>${version.plugin.maven.surefire}</version>
                         <configuration>
                             <skip>true</skip>
                         </configuration>
@@ -403,7 +473,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
+                        <version>${version.plugin.maven.surefire}</version>
                         <configuration>
                             <skip>true</skip>
                         </configuration>
@@ -433,7 +503,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
+                        <version>${version.plugin.maven.surefire}</version>
                         <configuration>
                             <skip>true</skip>
                         </configuration>
@@ -463,7 +533,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
+                        <version>${version.plugin.maven.surefire}</version>
                         <configuration>
                             <skip>true</skip>
                         </configuration>

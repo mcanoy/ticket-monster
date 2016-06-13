@@ -25,8 +25,10 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
+@Category(Arquillian.class)
 @RunWith(Arquillian.class)
 public class BookingServiceTest {
 

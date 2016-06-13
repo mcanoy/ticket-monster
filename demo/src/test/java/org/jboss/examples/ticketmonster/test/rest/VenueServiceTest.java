@@ -15,8 +15,10 @@ import org.jboss.examples.ticketmonster.rest.VenueService;
 import org.jboss.examples.ticketmonster.util.MultivaluedHashMap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
+@Category(Arquillian.class)
 @RunWith(Arquillian.class)
 public class VenueServiceTest {
     
