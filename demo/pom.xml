@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.examples</groupId>
     <artifactId>ticket-monster</artifactId>
-    <version>2.7.1-rhlabs</version>
+    <version>5</version>
     <packaging>war</packaging>
     <name>ticket-monster</name>
     <description>A starter HTML5 + REST webapp project for use on JBoss EAP.</description>
@@ -351,18 +351,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>versions-maven-plugin</artifactId>
-                        <version>2.2</version>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-scm-plugin</artifactId>
-                        <version>1.8.1</version>
-                        <configuration>
-                            <tag>${project.artifactId}-${project.version}</tag>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <version>${version.jacoco}</version>
@@ -564,6 +552,18 @@
             <id>release-dist</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <version>2.2</version>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-scm-plugin</artifactId>
+                        <version>1.8.1</version>
+                        <configuration>
+                            <tag>${project.artifactId}-${project.version}</tag>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <configuration>
