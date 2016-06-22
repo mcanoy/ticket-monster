@@ -300,6 +300,10 @@
         </pluginManagement>
     </build>
 
+    <scm>
+        <connection>scm:git:https://github.com/mcanoy/ticket-monster.git</connection>
+    </scm>
+
     <distributionManagement>
         <repository>
             <id>Releases</id>
@@ -346,6 +350,18 @@
             <id>arq-jbossas-managed</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <version>2.2</version>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-scm-plugin</artifactId>
+                        <version>1.8.1</version>
+                        <configuration>
+                            <tag>${project.artifactId}-${project.version}</tag>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
