@@ -38,7 +38,7 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   APP_VERSION=`xmllint --xpath "//*[local-name()='project']/*[local-name()='version']/text()" pom.xml`
   NEXUS_URL=`xmllint --xpath "//*[local-name()='project']/*[local-name()='distributionManagement']/*[local-name()='repository']/*[local-name()='url']/text()" pom.xml`
 
-  NEXUS_WAR_URL=$NEXUS_URL$GROUP_ID/$ART_ID/$APP_VERSION/$ART_ID-$APP_VERSION.war
+  NEXUS_WAR_URL=$NEXUS_URL$GROUP_ID/$ART_ID/$APP_VERSION/$ART_ID-$APP_VERSION-$BUILD_JOB_NUMBER.war
   echo "TicketMonster war is -"$NEXUS_WAR_URL"-...."
 fi
 
